@@ -1,6 +1,134 @@
-# 
+#
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "field:account.configuration,invoice_qty_decimal:"
+msgid "Invoice Qty Decimal"
+msgstr "Decimales de Cant. en facturas"
+
+msgctxt "field:account.configuration.company,company:"
+msgid "Company"
+msgstr "Empresa"
+
+msgctxt "field:account.configuration.company,create_date:"
+msgid "Create Date"
+msgstr "Fecha de creación"
+
+msgctxt "field:account.configuration.company,create_uid:"
+msgid "Create User"
+msgstr "Usuario de creación"
+
+msgctxt "field:account.configuration.company,id:"
+msgid "ID"
+msgstr "Identificador"
+
+msgctxt "field:account.configuration.company,invoice_qty_decimal:"
+msgid "Invoice Qty Decimal"
+msgstr "Decimales de Cant. en facturas"
+
+msgctxt "field:account.configuration.company,rec_name:"
+msgid "Name"
+msgstr "Nombre"
+
+msgctxt "field:account.configuration.company,write_date:"
+msgid "Write Date"
+msgstr "Fecha modificación"
+
+msgctxt "field:account.configuration.company,write_uid:"
+msgid "Write User"
+msgstr "Usuario modificación"
+
+msgctxt "help:account.configuration,invoice_qty_decimal:"
+msgid "Show qty with or without decimals"
+msgstr "Mostrar la Cant. con o sin decimales"
+
+msgctxt "jasper:account.invoice.jreport:"
+msgid "Amount"
+msgstr "Importe"
+
+msgctxt "jasper:account.invoice.jreport:"
+msgid "Credit Note"
+msgstr "Factura de abono"
+
+msgctxt "jasper:account.invoice.jreport:"
+msgid "Date"
+msgstr "Fecha"
+
+msgctxt "jasper:account.invoice.jreport:"
+msgid "Description"
+msgstr "Descripción"
+
+msgctxt "jasper:account.invoice.jreport:"
+msgid "Due Date"
+msgstr "Fecha vencimiento"
+
+msgctxt "jasper:account.invoice.jreport:"
+msgid "Invoice"
+msgstr "Facturar"
+
+msgctxt "jasper:account.invoice.jreport:"
+msgid "Origins"
+msgstr "Orígenes"
+
+msgctxt "jasper:account.invoice.jreport:"
+msgid "Payment Term"
+msgstr "Plazo de pago"
+
+msgctxt "jasper:account.invoice.jreport:"
+msgid "Payment Type"
+msgstr "Tipo de pago"
+
+msgctxt "jasper:account.invoice.jreport:"
+msgid "Price"
+msgstr "Precio"
+
+msgctxt "jasper:account.invoice.jreport:"
+msgid "Pro-forma"
+msgstr "Pro-forma"
+
+msgctxt "jasper:account.invoice.jreport:"
+msgid "Qtat."
+msgstr "Cant."
+
+msgctxt "jasper:account.invoice.jreport:"
+msgid "Quotation"
+msgstr "Presupuesto"
+
+msgctxt "jasper:account.invoice.jreport:"
+msgid "Reference"
+msgstr "Referencia"
+
+msgctxt "jasper:account.invoice.jreport:"
+msgid "Simplified Invoice"
+msgstr "Factura simplificada"
+
+msgctxt "jasper:account.invoice.jreport:"
+msgid "Tax"
+msgstr "Impuestos"
+
+msgctxt "jasper:account.invoice.jreport:"
+msgid "Tax Amount"
+msgstr "Impuesto"
+
+msgctxt "jasper:account.invoice.jreport:"
+msgid "Tax Base"
+msgstr "Base imponible"
+
+msgctxt "jasper:account.invoice.jreport:"
+msgid "Tax Vat"
+msgstr "Impuesto"
+
+msgctxt "jasper:account.invoice.jreport:"
+msgid "Total"
+msgstr "Total"
+
+msgctxt "jasper:account.invoice.jreport:"
+msgid "Untaxed"
+msgstr "Base imponible"
+
+msgctxt "jasper:account.invoice.jreport:"
+msgid "VAT"
+msgstr "NIF"
 
 msgctxt "jasper:account.invoice:"
 msgid "Base"
@@ -11,20 +139,36 @@ msgid "Credit Note"
 msgstr "Abono"
 
 msgctxt "jasper:account.invoice:"
+msgid "DTE."
+msgstr "DTE."
+
+msgctxt "jasper:account.invoice:"
 msgid "Date"
 msgstr "Fecha"
+
+msgctxt "jasper:account.invoice:"
+msgid "Debit"
+msgstr "Debe"
 
 msgctxt "jasper:account.invoice:"
 msgid "Description"
 msgstr "Descripción"
 
 msgctxt "jasper:account.invoice:"
-msgid "DTE."
-msgstr "DTE."
+msgid "Due dates"
+msgstr "Vencimientos"
 
 msgctxt "jasper:account.invoice:"
 msgid "Invoice"
 msgstr "Factura"
+
+msgctxt "jasper:account.invoice:"
+msgid "Maturity date"
+msgstr "Vencimiento"
+
+msgctxt "jasper:account.invoice:"
+msgid "Origins"
+msgstr "Origen"
 
 msgctxt "jasper:account.invoice:"
 msgid "Payment Term"
@@ -55,12 +199,20 @@ msgid "Reference"
 msgstr "Referencia"
 
 msgctxt "jasper:account.invoice:"
+msgid "Simplified Invoice"
+msgstr "Factura simplificada"
+
+msgctxt "jasper:account.invoice:"
 msgid "Tax"
 msgstr "Impuesto"
 
 msgctxt "jasper:account.invoice:"
 msgid "Tax Vat"
 msgstr "Impuesto"
+
+msgctxt "jasper:account.invoice:"
+msgid "Taxes"
+msgstr "Impuestos"
 
 msgctxt "jasper:account.invoice:"
 msgid "Total"
@@ -74,26 +226,10 @@ msgctxt "jasper:account.invoice:"
 msgid "VAT"
 msgstr "CIF/NIF"
 
-msgctxt "jasper:account.invoice:"
-msgid "Taxes"
-msgstr "Impuestos"
+msgctxt "model:account.configuration.company,name:"
+msgid "Account Configuration per Company"
+msgstr "Configuración de cuenta por compañía"
 
-msgctxt "jasper:account.invoice:"
-msgid "Due dates"
-msgstr "Vencimientos"
-
-msgctxt "jasper:account.invoice:"
-msgid "Maturity date"
-msgstr "Vencimiento"
-
-msgctxt "jasper:account.invoice:"
-msgid "Debit"
-msgstr "Debe"
-
-msgctxt "jasper:account.invoice:"
-msgid "Origins"
-msgstr "Origen"
-
-msgctxt "jasper:account.invoice:"
-msgid "Simplified Invoice"
-msgstr "Factura simplificada"
+msgctxt "model:ir.action,name:report_invoice"
+msgid "Invoice"
+msgstr "Facturar"

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="invoice" language="i18ngroovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ef58b8f6-a59b-4d9c-94cb-c2089034d430">
 	<property name="TRYTON_RELATIONS" value="[&apos;lines&apos;]"/>
-	<property name="ireport.zoom" value="1.464100000000004"/>
+	<property name="ireport.zoom" value="1.771561000000005"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="63"/>
+	<property name="ireport.y" value="302"/>
 	<subDataset name="taxes" uuid="5221ae81-f459-44b2-ac92-4babe070fc67">
 		<parameter name="REWIND" class="java.lang.Object">
 			<parameterDescription><![CDATA[]]></parameterDescription>
@@ -27,7 +27,7 @@
 		<field name="taxes-amount" class="java.lang.Number">
 			<fieldDescription><![CDATA[/data/record/taxes-taxes/amount-amount]]></fieldDescription>
 		</field>
-		<field name="taxes-description" class="java.lang.String">
+		<field name="name" class="java.lang.String">
 			<fieldDescription><![CDATA[/data/record/taxes-taxes/description-description]]></fieldDescription>
 		</field>
 		<field name="taxes-tax-rate" class="java.math.BigDecimal">
@@ -39,13 +39,23 @@
 		<field name="taxes-tax-amount" class="java.lang.String">
 			<fieldDescription><![CDATA[/data/record/taxes-taxes/tax-tax/amount-amount]]></fieldDescription>
 		</field>
+		<field name="report_description" class="java.lang.String">
+			<fieldDescription><![CDATA[/data/record/taxes/report_description]]></fieldDescription>
+		</field>
 		<variable name="L" class="java.util.Locale">
 			<variableExpression><![CDATA[$F{party-lang} != null && $F{party-lang}.length() == 5 ? new Locale($F{party-lang}) : ( $F{party-lang} != null && $F{party-lang}.length() == 2 ? new Locale($F{party-lang}) : new Locale('en_US'))]]></variableExpression>
 			<initialValueExpression><![CDATA[$F{party-lang} != null && $F{party-lang}.length() == 5 ? new Locale($F{party-lang}) : ( $F{party-lang} != null && $F{party-lang}.length() == 2 ? new Locale($F{party-lang}) : new Locale('en_US'))]]></initialValueExpression>
 		</variable>
+		<variable name="name" class="java.lang.String">
+			<variableExpression><![CDATA[$F{name}]]></variableExpression>
+		</variable>
+		<variable name="report_description" class="java.lang.String">
+			<variableExpression><![CDATA[($V{report_description} != null && $V{report_description} != "" && $V{report_description} != $F{report_description} ? $V{report_description} + "\n" : "") + $F{report_description}]]></variableExpression>
+			<initialValueExpression><![CDATA[$F{report_description}]]></initialValueExpression>
+		</variable>
 		<filterExpression><![CDATA[($P{INVOICE_ID} == $F{invoice_id})]]></filterExpression>
 	</subDataset>
-	<subDataset name="lines_to_pay" uuid="2574814a-7d85-4740-b981-ff0baa86c908">
+	<subDataset name="dates" uuid="2574814a-7d85-4740-b981-ff0baa86c908">
 		<parameter name="REWIND" class="java.lang.Object">
 			<parameterDescription><![CDATA[]]></parameterDescription>
 			<defaultValueExpression><![CDATA[$P{REPORT_DATA_SOURCE}.moveFirst()]]></defaultValueExpression>
@@ -81,8 +91,9 @@
 		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="INVOICE_ID" class="java.lang.String"/>
-	<parameter name="DUE_DS" class="java.lang.Object"/>
+	<parameter name="DATES_DS" class="java.lang.Object"/>
 	<parameter name="TAXES_DS" class="java.lang.Object"/>
+	<parameter name="invoice_qty_decimal" class="java.lang.Boolean"/>
 	<queryString language="xPath">
 		<![CDATA[]]>
 	</queryString>
@@ -121,9 +132,6 @@
 	</field>
 	<field name="company-footer" class="java.lang.String">
 		<fieldDescription><![CDATA[/data/record/company-company/footer-footer]]></fieldDescription>
-	</field>
-	<field name="company-invoice_qty" class="java.lang.Boolean">
-		<fieldDescription><![CDATA[/data/record/company-company/invoice_qty-invoice_qty]]></fieldDescription>
 	</field>
 	<field name="party-full_name" class="java.lang.String">
 		<fieldDescription><![CDATA[/data/record/party-party/full_name-full_name]]></fieldDescription>
@@ -194,7 +202,7 @@
 	<field name="user-email" class="java.lang.String">
 		<fieldDescription><![CDATA[/data/record/create_uid-create_uid/email-email]]></fieldDescription>
 	</field>
-	<field name="line-quantity" class="java.lang.String">
+	<field name="line-quantity" class="java.lang.Double">
 		<fieldDescription><![CDATA[/data/record/lines-lines/quantity-quantity]]></fieldDescription>
 	</field>
 	<field name="line-note" class="java.lang.String">
@@ -218,13 +226,13 @@
 	<field name="line-tax-name" class="java.lang.String">
 		<fieldDescription><![CDATA[/data/record/lines-lines/invoice_taxes-invoice_taxes/tax-tax/name-name]]></fieldDescription>
 	</field>
-	<field name="line-tax-rate" class="java.lang.Number">
+	<field name="line-tax-rate" class="java.lang.Double">
 		<fieldDescription><![CDATA[/data/record/lines-lines/invoice_taxes-invoice_taxes/tax-tax/rate-rate]]></fieldDescription>
 	</field>
 	<field name="line-tax-type" class="java.lang.String">
 		<fieldDescription><![CDATA[/data/record/lines-lines/invoice_taxes-invoice_taxes/tax-tax/type-type]]></fieldDescription>
 	</field>
-	<field name="line-tax-amount" class="java.lang.String">
+	<field name="line-tax-amount" class="java.lang.Double">
 		<fieldDescription><![CDATA[/data/record/lines-lines/invoice_taxes-invoice_taxes/tax-tax/amount-amount]]></fieldDescription>
 	</field>
 	<field name="symbol-symbol" class="java.lang.String">
@@ -388,7 +396,7 @@
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="162" splitType="Prevent">
+			<band height="202" splitType="Prevent">
 				<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="false">
 					<reportElement x="434" y="30" width="95" height="14" uuid="05b18839-fd5e-4786-a977-5ef1a341fa09"/>
 					<textElement textAlignment="Right">
@@ -432,7 +440,7 @@
 					<textFieldExpression><![CDATA[tr($V{L},"Untaxed")]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement x="341" y="59" width="199" height="12" uuid="f98b73c2-40f5-4951-a74c-3c41ad8c3e4d">
+					<reportElement x="10" y="123" width="529" height="12" uuid="f98b73c2-40f5-4951-a74c-3c41ad8c3e4d">
 						<printWhenExpression><![CDATA[$F{payment_term-name} != '']]></printWhenExpression>
 					</reportElement>
 					<textElement>
@@ -451,7 +459,7 @@
 					<textFieldExpression><![CDATA[$F{symbol-symbol}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement x="12" y="121" width="528" height="36" isRemoveLineWhenBlank="true" uuid="953a6eb6-324b-4a19-b827-381bb75e1637"/>
+					<reportElement x="12" y="164" width="528" height="36" isRemoveLineWhenBlank="true" uuid="953a6eb6-324b-4a19-b827-381bb75e1637"/>
 					<textElement>
 						<font size="9"/>
 					</textElement>
@@ -461,7 +469,7 @@
 					<reportElement x="10" y="25" width="530" height="1" uuid="3b2441e0-d347-40a9-877e-5c359698a821"/>
 				</line>
 				<textField>
-					<reportElement x="341" y="74" width="199" height="12" uuid="cf0d63cf-238d-4158-9a90-d9f3202fa7a3">
+					<reportElement x="10" y="137" width="530" height="12" uuid="cf0d63cf-238d-4158-9a90-d9f3202fa7a3">
 						<printWhenExpression><![CDATA[$F{payment_type-name}.get($F{party-lang}) != null]]></printWhenExpression>
 					</reportElement>
 					<textElement>
@@ -469,180 +477,8 @@
 					</textElement>
 					<textFieldExpression><![CDATA[tr($V{L},"Payment Type")+": "+$F{payment_type-name}.get($F{party-lang})]]></textFieldExpression>
 				</textField>
-				<componentElement>
-					<reportElement key="table 1" x="8" y="71" width="168" height="50" uuid="9bb63471-5005-4919-a92e-5b494fa8fd09">
-						<property name="TRYTON_RELATIONS" value="taxes"/>
-						<printWhenExpression><![CDATA[$F{taxes-id}.length() > 0]]></printWhenExpression>
-					</reportElement>
-					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-						<datasetRun subDataset="taxes" uuid="d8ab3f36-e783-4348-b91d-994987cbb219">
-							<datasetParameter name="INVOICE_ID">
-								<datasetParameterExpression><![CDATA[$F{id}]]></datasetParameterExpression>
-							</datasetParameter>
-							<dataSourceExpression><![CDATA[$P{TAXES_DS}]]></dataSourceExpression>
-						</datasetRun>
-						<jr:column width="52" uuid="a5f33de6-26e1-4ed9-a249-228c92c3097c">
-							<jr:tableHeader height="0" rowSpan="1"/>
-							<jr:tableFooter height="0" rowSpan="1"/>
-							<jr:columnHeader height="12" rowSpan="1">
-								<textField>
-									<reportElement x="2" y="0" width="50" height="11" uuid="f14e6e60-b01e-44c0-a405-a723df581b23"/>
-									<textElement>
-										<font size="9"/>
-									</textElement>
-									<textFieldExpression><![CDATA[tr($V{L},"Tax")]]></textFieldExpression>
-								</textField>
-								<line>
-									<reportElement x="2" y="11" width="50" height="1" uuid="3b4e5c4b-9a24-41d3-bdff-9fc99f5376d0"/>
-								</line>
-							</jr:columnHeader>
-							<jr:columnFooter height="0" rowSpan="1"/>
-							<jr:detailCell height="12" rowSpan="1">
-								<textField isStretchWithOverflow="true" pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
-									<reportElement x="2" y="0" width="50" height="12" uuid="7424f07c-807f-441e-b21b-21c3af2f075a"/>
-									<textElement>
-										<font size="9"/>
-									</textElement>
-									<textFieldExpression><![CDATA[$F{taxes-tax-type} == 'percentage' ? $F{taxes-tax-rate}*100+"%" : $F{taxes-tax-amount} ? $F{taxes-tax-amount} : '']]></textFieldExpression>
-								</textField>
-							</jr:detailCell>
-						</jr:column>
-						<jr:column width="64" uuid="e9da85f2-1b99-43cb-af18-1ae1a1ea83b2">
-							<jr:tableHeader height="0" rowSpan="1"/>
-							<jr:tableFooter height="0" rowSpan="1"/>
-							<jr:columnHeader height="12" rowSpan="1">
-								<textField>
-									<reportElement x="0" y="0" width="64" height="11" uuid="4316886b-ddfd-41b3-88f7-38845a77c0ef"/>
-									<textElement>
-										<font size="9"/>
-									</textElement>
-									<textFieldExpression><![CDATA[tr($V{L},"Base")]]></textFieldExpression>
-								</textField>
-								<line>
-									<reportElement x="0" y="11" width="64" height="1" uuid="57840f6f-a3b8-4f4c-ac34-bdbfa8e0119c"/>
-								</line>
-							</jr:columnHeader>
-							<jr:columnFooter height="0" rowSpan="1"/>
-							<jr:detailCell height="12" rowSpan="1">
-								<textField pattern="#,##0.00" isBlankWhenNull="true">
-									<reportElement x="0" y="0" width="64" height="12" uuid="95ba9998-be52-47ee-80d1-b65a1bba8c25"/>
-									<textElement>
-										<font size="9"/>
-									</textElement>
-									<textFieldExpression><![CDATA[$F{taxes-base}]]></textFieldExpression>
-								</textField>
-							</jr:detailCell>
-						</jr:column>
-						<jr:column width="51" uuid="8c49c7bf-5245-4525-9bf6-6f4799752f68">
-							<jr:tableHeader height="0" rowSpan="1"/>
-							<jr:tableFooter height="0" rowSpan="1"/>
-							<jr:columnHeader height="12" rowSpan="1">
-								<textField>
-									<reportElement x="0" y="0" width="49" height="11" uuid="225026aa-06f5-483f-b93c-765523f9f64c"/>
-									<textElement>
-										<font size="9"/>
-									</textElement>
-									<textFieldExpression><![CDATA[tr($V{L},"Total")]]></textFieldExpression>
-								</textField>
-								<line>
-									<reportElement x="0" y="11" width="51" height="1" uuid="665e8775-a1c2-432e-a2fe-c87efca04902"/>
-								</line>
-							</jr:columnHeader>
-							<jr:columnFooter height="0" rowSpan="1"/>
-							<jr:detailCell height="12" rowSpan="1">
-								<textField isStretchWithOverflow="true" pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
-									<reportElement x="0" y="0" width="51" height="12" uuid="41e83f81-8ac9-4ff3-bcdb-02e3991c9389"/>
-									<textElement>
-										<font size="9"/>
-									</textElement>
-									<textFieldExpression><![CDATA[$F{taxes-amount}]]></textFieldExpression>
-								</textField>
-							</jr:detailCell>
-						</jr:column>
-					</jr:table>
-				</componentElement>
-				<componentElement>
-					<reportElement key="table2" x="187" y="71" width="140" height="50" uuid="2f90e824-d446-42fb-9825-dd28077c2519">
-						<property name="TRYTON_RELATIONS" value="lines_to_pay"/>
-						<printWhenExpression><![CDATA[$F{maturity_date-maturity_date}.length() > 0]]></printWhenExpression>
-					</reportElement>
-					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-						<datasetRun subDataset="lines_to_pay" uuid="8293224d-610b-47c7-ac51-b8b8b3ac7ba7">
-							<datasetParameter name="INVOICE_ID">
-								<datasetParameterExpression><![CDATA[$F{id}]]></datasetParameterExpression>
-							</datasetParameter>
-							<dataSourceExpression><![CDATA[$P{DUE_DS}]]></dataSourceExpression>
-						</datasetRun>
-						<jr:column width="70" uuid="c193e098-f837-4ffa-b449-cd871e55276f">
-							<jr:tableHeader height="1" rowSpan="1"/>
-							<jr:columnHeader height="12" rowSpan="1">
-								<textField>
-									<reportElement x="2" y="0" width="68" height="11" uuid="a752f346-1c00-4974-80ea-4149aaa0354b"/>
-									<textElement>
-										<font size="9"/>
-									</textElement>
-									<textFieldExpression><![CDATA[tr($V{L},"Maturity date")]]></textFieldExpression>
-								</textField>
-								<line>
-									<reportElement x="2" y="11" width="68" height="1" uuid="c3fa28a3-8697-4b7b-a142-675a2b6efe57"/>
-								</line>
-							</jr:columnHeader>
-							<jr:detailCell height="14" rowSpan="1">
-								<textField pattern="dd/MM/yyyy">
-									<reportElement x="2" y="0" width="68" height="12" uuid="061ee816-155d-4d40-8e20-2bb0b6411481"/>
-									<textElement>
-										<font size="9"/>
-									</textElement>
-									<textFieldExpression><![CDATA[$F{maturity_date-maturity_date}]]></textFieldExpression>
-								</textField>
-							</jr:detailCell>
-						</jr:column>
-						<jr:column width="70" uuid="104674c8-1dc8-42c8-84b0-8bfa99b239df">
-							<jr:tableHeader height="1" rowSpan="1"/>
-							<jr:columnHeader height="12" rowSpan="1">
-								<textField>
-									<reportElement x="0" y="0" width="70" height="11" uuid="4eb2a9a4-134f-4e05-b52a-77615b88ee5f"/>
-									<textElement>
-										<font size="9"/>
-									</textElement>
-									<textFieldExpression><![CDATA[tr($V{L},"Debit")]]></textFieldExpression>
-								</textField>
-								<line>
-									<reportElement x="0" y="11" width="70" height="1" uuid="75cde5ed-b790-478c-b1e9-adbbd2310cce"/>
-								</line>
-							</jr:columnHeader>
-							<jr:detailCell height="14" rowSpan="1">
-								<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
-									<reportElement x="0" y="0" width="70" height="12" uuid="ad68598f-930b-492f-ab79-b8fae2b98d0c"/>
-									<textElement>
-										<font size="9"/>
-									</textElement>
-									<textFieldExpression><![CDATA[$F{credit-credit} ? $F{debit-debit} ? $F{debit-debit}-$F{credit-credit} : 0-$F{credit-credit} : $F{debit-debit}]]></textFieldExpression>
-								</textField>
-							</jr:detailCell>
-						</jr:column>
-					</jr:table>
-				</componentElement>
-				<textField>
-					<reportElement x="189" y="59" width="140" height="12" uuid="f4277fed-faf6-4521-8fd7-24496c595084">
-						<printWhenExpression><![CDATA[$F{maturity_date-maturity_date}.length() > 0]]></printWhenExpression>
-					</reportElement>
-					<textElement>
-						<font size="9" isBold="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[tr($V{L},"Due dates")]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="10" y="59" width="166" height="12" uuid="8d47cb48-94f8-4578-9e20-bc4568942364">
-						<printWhenExpression><![CDATA[$F{taxes-id}.length() > 0]]></printWhenExpression>
-					</reportElement>
-					<textElement>
-						<font size="9" isBold="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[tr($V{L},"Taxes")]]></textFieldExpression>
-				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement x="342" y="89" width="199" height="30" uuid="9c25389b-7a6f-40a7-885a-9149f1b07294">
+					<reportElement x="12" y="149" width="528" height="13" uuid="9c25389b-7a6f-40a7-885a-9149f1b07294">
 						<printWhenExpression><![CDATA[$F{payment_type-note}.get($F{party-lang}) != null]]></printWhenExpression>
 					</reportElement>
 					<textElement>
@@ -650,6 +486,210 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$F{payment_type-note}.get($F{party-lang})]]></textFieldExpression>
 				</textField>
+				<componentElement>
+					<reportElement key="table 1" positionType="FixRelativeToBottom" mode="Transparent" x="10" y="65" width="300" height="51" uuid="be25e49f-cb20-410e-a993-78817dedfbf7">
+						<property name="TRYTON_RELATIONS" value="taxes"/>
+					</reportElement>
+					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+						<datasetRun subDataset="taxes" uuid="294fc504-ad5c-4a3a-8ca2-9ef1fbc19525">
+							<datasetParameter name="INVOICE_ID">
+								<datasetParameterExpression><![CDATA[$F{id}]]></datasetParameterExpression>
+							</datasetParameter>
+							<dataSourceExpression><![CDATA[$P{TAXES_DS}]]></dataSourceExpression>
+						</datasetRun>
+						<jr:columnGroup width="300" uuid="387a8412-9529-4b8e-955d-1f6865e773bc">
+							<jr:tableFooter height="30" rowSpan="1">
+								<textField isStretchWithOverflow="true">
+									<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="0" width="300" height="30" uuid="067bba38-e24e-406f-af0a-d49e3a512e0e"/>
+									<textElement textAlignment="Left" verticalAlignment="Top">
+										<font fontName="SansSerif" size="7" isItalic="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{report_description}]]></textFieldExpression>
+								</textField>
+							</jr:tableFooter>
+							<jr:column width="80" uuid="a989305f-1b87-4ba9-9658-b5d4db1f59e6">
+								<jr:tableHeader height="0" rowSpan="1"/>
+								<jr:columnHeader height="13" rowSpan="1">
+									<box>
+										<topPen lineWidth="0.0"/>
+										<leftPen lineWidth="0.0"/>
+										<rightPen lineWidth="0.0"/>
+									</box>
+									<textField>
+										<reportElement mode="Transparent" x="0" y="0" width="78" height="13" backcolor="#FFFFFF" uuid="efed6f1f-ac3d-41a0-819f-913c4db7a205"/>
+										<textElement verticalAlignment="Middle">
+											<font fontName="SansSerif" size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+										</textElement>
+										<textFieldExpression><![CDATA[tr($V{L},"Tax Base")]]></textFieldExpression>
+									</textField>
+								</jr:columnHeader>
+								<jr:columnFooter height="0" rowSpan="1"/>
+								<jr:detailCell height="14" rowSpan="1">
+									<box>
+										<pen lineWidth="0.0"/>
+										<topPen lineWidth="0.0"/>
+										<leftPen lineWidth="0.0"/>
+										<bottomPen lineWidth="0.0"/>
+										<rightPen lineWidth="0.0"/>
+									</box>
+									<textField isStretchWithOverflow="true" pattern="#,##0.00;-#,##0.00">
+										<reportElement mode="Transparent" x="0" y="0" width="68" height="14" uuid="b7131bb8-16d7-4a15-b8dc-56b9a9ba0d3f"/>
+										<textElement textAlignment="Right">
+											<font fontName="SansSerif" size="10"/>
+										</textElement>
+										<textFieldExpression><![CDATA[$F{taxes-base} == null ? 0 : $F{taxes-base}]]></textFieldExpression>
+									</textField>
+									<staticText>
+										<reportElement x="68" y="0" width="10" height="14" uuid="4e5e2afa-4e90-4eeb-bf95-53abd8d49bf1"/>
+										<textElement textAlignment="Center">
+											<font fontName="SansSerif" size="10"/>
+										</textElement>
+										<text><![CDATA[€]]></text>
+									</staticText>
+								</jr:detailCell>
+							</jr:column>
+							<jr:column width="140" uuid="13e6c5d3-8b21-4ed8-a2ed-638f5dcfb72d">
+								<jr:tableHeader height="0" rowSpan="1"/>
+								<jr:columnHeader height="13" rowSpan="1">
+									<box>
+										<pen lineWidth="0.75"/>
+										<topPen lineWidth="0.0"/>
+										<leftPen lineWidth="0.0"/>
+										<bottomPen lineWidth="0.0"/>
+										<rightPen lineWidth="0.0"/>
+									</box>
+									<textField>
+										<reportElement mode="Transparent" x="2" y="0" width="136" height="13" uuid="942b3b10-9d26-460b-9a63-99742c7ef2c8"/>
+										<textElement textAlignment="Center" verticalAlignment="Middle">
+											<font fontName="SansSerif" size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+										</textElement>
+										<textFieldExpression><![CDATA[tr($V{L},"Tax")]]></textFieldExpression>
+									</textField>
+								</jr:columnHeader>
+								<jr:columnFooter height="0" rowSpan="1"/>
+								<jr:detailCell height="14" rowSpan="1">
+									<box>
+										<leftPen lineWidth="0.0"/>
+										<bottomPen lineWidth="0.0"/>
+										<rightPen lineWidth="0.0"/>
+									</box>
+									<textField>
+										<reportElement mode="Transparent" x="2" y="0" width="136" height="14" uuid="31493ce7-7279-416d-8047-c7fcab6106c7"/>
+										<textElement textAlignment="Center">
+											<font fontName="SansSerif"/>
+										</textElement>
+										<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+							<jr:column width="80" uuid="6ab8b589-4fd5-4752-937a-798a9d134a69">
+								<jr:tableHeader height="0" rowSpan="1"/>
+								<jr:columnHeader height="13" rowSpan="1">
+									<box>
+										<topPen lineWidth="0.0"/>
+										<leftPen lineWidth="0.0"/>
+										<rightPen lineWidth="0.0"/>
+									</box>
+									<textField>
+										<reportElement x="0" y="0" width="78" height="13" uuid="aa0fb5ad-eb64-4cb4-908e-5b1f2d51c72a"/>
+										<textElement textAlignment="Right" verticalAlignment="Middle">
+											<font fontName="SansSerif" size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+										</textElement>
+										<textFieldExpression><![CDATA[tr($V{L},"Tax Amount")]]></textFieldExpression>
+									</textField>
+								</jr:columnHeader>
+								<jr:columnFooter height="0" rowSpan="1"/>
+								<jr:detailCell height="14" rowSpan="1">
+									<box>
+										<leftPen lineWidth="0.0"/>
+										<bottomPen lineWidth="0.0"/>
+										<rightPen lineWidth="0.0"/>
+									</box>
+									<textField isStretchWithOverflow="true" pattern="#,##0.00;-#,##0.00">
+										<reportElement x="0" y="0" width="68" height="14" uuid="805b0946-df45-4cd1-b0d5-f1caea9f2271"/>
+										<textElement textAlignment="Right">
+											<font fontName="SansSerif" size="10"/>
+										</textElement>
+										<textFieldExpression><![CDATA[$F{taxes-amount} == null ? 0 : $F{taxes-amount}]]></textFieldExpression>
+									</textField>
+									<staticText>
+										<reportElement x="68" y="0" width="10" height="14" uuid="bcb3c068-0f80-46e9-9825-cd9e05b8134e"/>
+										<textElement textAlignment="Center">
+											<font fontName="SansSerif" size="10"/>
+										</textElement>
+										<text><![CDATA[€]]></text>
+									</staticText>
+								</jr:detailCell>
+							</jr:column>
+						</jr:columnGroup>
+					</jr:table>
+				</componentElement>
+				<componentElement>
+					<reportElement key="table 3" x="358" y="59" width="180" height="51" uuid="565e49d1-8592-4de9-85fb-d86d963409a7">
+						<property name="TRYTON_RELATIONS" value="move/lines"/>
+					</reportElement>
+					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+						<datasetRun subDataset="dates" uuid="ed8834b3-9d18-43aa-9359-6dd0e06158f2">
+							<datasetParameter name="INVOICE_ID">
+								<datasetParameterExpression><![CDATA[$F{id}]]></datasetParameterExpression>
+							</datasetParameter>
+							<dataSourceExpression><![CDATA[$P{DATES_DS}]]></dataSourceExpression>
+						</datasetRun>
+						<jr:column width="100" uuid="5cd7ee68-153e-44be-bd29-54cf3f1ebb83">
+							<jr:tableHeader height="0" rowSpan="1"/>
+							<jr:tableFooter height="0" rowSpan="1"/>
+							<jr:columnHeader height="14" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="98" height="13" uuid="eb9834cd-0ede-4701-85fc-3557159ea1e4"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font fontName="SansSerif" size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+									</textElement>
+									<textFieldExpression><![CDATA[tr($V{L},"Due Date")]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter height="0" rowSpan="1"/>
+							<jr:detailCell height="14" rowSpan="1">
+								<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+									<reportElement x="0" y="0" width="98" height="14" uuid="0e2c450b-b4a6-455e-9917-4946e7e2928f"/>
+									<textElement textAlignment="Center">
+										<font fontName="SansSerif" size="10"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{maturity_date-maturity_date}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="80" uuid="a18ee870-78db-4389-95e4-40a8a12a7c20">
+							<jr:tableHeader height="0" rowSpan="1"/>
+							<jr:tableFooter height="0" rowSpan="1"/>
+							<jr:columnHeader height="14" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="78" height="13" uuid="d5dc54f1-9f38-4cae-b3f5-1e3abf6e2588"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle">
+										<font fontName="SansSerif" size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+									</textElement>
+									<textFieldExpression><![CDATA[tr($V{L},"Amount")]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter height="0" rowSpan="1"/>
+							<jr:detailCell height="14" rowSpan="1">
+								<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+									<reportElement x="0" y="0" width="68" height="14" uuid="4e7898a2-d7c2-4d89-a4d0-dcb353bc1b94"/>
+									<textElement textAlignment="Right">
+										<font fontName="SansSerif" size="10"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{debit-debit}]]></textFieldExpression>
+								</textField>
+								<staticText>
+									<reportElement x="68" y="0" width="10" height="14" uuid="858549c4-776e-40aa-ade4-02b5b9d9b564"/>
+									<textElement textAlignment="Center">
+										<font fontName="SansSerif" size="10"/>
+									</textElement>
+									<text><![CDATA[€]]></text>
+								</staticText>
+							</jr:detailCell>
+						</jr:column>
+					</jr:table>
+				</componentElement>
 			</band>
 		</groupFooter>
 	</group>
@@ -697,7 +737,15 @@
 				<textElement textAlignment="Right">
 					<font size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{gross_unit_price-gross_unit_price} ? $F{gross_unit_price-gross_unit_price} : $F{line-unit_price} ? $F{line-unit_price} : 0]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{gross_unit_price-gross_unit_price}
+?
+    $F{gross_unit_price-gross_unit_price}
+:
+    $F{line-unit_price}
+    ?
+        $F{line-unit_price}
+    :
+        0]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="false">
 				<reportElement x="490" y="2" width="50" height="12" uuid="0069eb56-2f17-4b11-8052-764bf45c8cc3">
@@ -717,23 +765,39 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{line-discount} ? "-"+ (int)Double.valueOf($F{line-discount}*100).doubleValue()+"%" : ""]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="">
 				<reportElement x="16" y="2" width="40" height="12" uuid="d58b9b80-69a4-47c7-84d1-b55075f02ee9">
 					<printWhenExpression><![CDATA[$F{line-type} == "line"]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center">
 					<font size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{line-quantity} ? $F{company-invoice_qty} ? (int)Double.valueOf($F{line-quantity}.trim()).doubleValue() : Double.valueOf($F{line-quantity}.trim()).doubleValue() : '0']]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{line-quantity} != null && $F{line-quantity} != ""
+?
+    $P{invoice_qty_decimal} == true
+    ?
+        String.format("%.2f", $F{line-quantity})
+    :
+        String.valueOf($F{line-quantity}).split("\\.")[0]
+:
+    ""]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
+			<textField pattern="" isBlankWhenNull="true">
 				<reportElement x="424" y="2" width="41" height="12" uuid="2c99d035-234a-4f0c-b5db-99607b8b6ea7">
 					<printWhenExpression><![CDATA[$F{line-type} == "line"]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Left">
 					<font size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{line-tax-type} == 'percentage' ? $F{line-tax-rate}*100+"%" : $F{line-tax-amount} ? $F{line-tax-amount} : '']]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{line-tax-type} == 'percentage'
+?
+    String.format("%.2f", ($F{line-tax-rate}*100)) + "%"
+:
+    $F{line-tax-amount}
+    ?
+        $F{line-tax-amount}
+    :
+        '']]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
