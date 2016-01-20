@@ -47,6 +47,10 @@ msgid "Amount"
 msgstr "Import"
 
 msgctxt "jasper:account.invoice.jreport:"
+msgid "Bank"
+msgstr "Banc"
+
+msgctxt "jasper:account.invoice.jreport:"
 msgid "Credit Note"
 msgstr "Abonament"
 

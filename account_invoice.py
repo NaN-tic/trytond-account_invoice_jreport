@@ -19,7 +19,7 @@ class InvoiceReport:
             'invoice_qty_decimal': config.invoice_qty_decimal
             }
         if 'parameters' in data:
-            data['parameters'] += parameters
+            data['parameters'].update(parameters)
         else:
             data['parameters'] = parameters
         return super(InvoiceReport, cls).execute(ids, data)
