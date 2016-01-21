@@ -3,7 +3,7 @@
 	<property name="TRYTON_RELATIONS" value="[&apos;lines&apos;]"/>
 	<property name="ireport.zoom" value="1.771561000000005"/>
 	<property name="ireport.x" value="9"/>
-	<property name="ireport.y" value="240"/>
+	<property name="ireport.y" value="0"/>
 	<subDataset name="taxes" uuid="5221ae81-f459-44b2-ac92-4babe070fc67">
 		<parameter name="REWIND" class="java.lang.Object">
 			<parameterDescription><![CDATA[]]></parameterDescription>
@@ -40,7 +40,7 @@
 			<fieldDescription><![CDATA[/data/record/taxes-taxes/tax-tax/amount-amount]]></fieldDescription>
 		</field>
 		<field name="report_description" class="java.lang.String">
-			<fieldDescription><![CDATA[/data/record/taxes/report_description]]></fieldDescription>
+			<fieldDescription><![CDATA[/data/record/taxes/tax/report_description]]></fieldDescription>
 		</field>
 		<variable name="L" class="java.util.Locale">
 			<variableExpression><![CDATA[$F{party-lang} != null && $F{party-lang}.length() == 5 ? new Locale($F{party-lang}) : ( $F{party-lang} != null && $F{party-lang}.length() == 2 ? new Locale($F{party-lang}) : new Locale('en_US'))]]></variableExpression>
@@ -511,7 +511,7 @@
 					<textFieldExpression><![CDATA[$F{payment_type-note}.get($F{party-lang})]]></textFieldExpression>
 				</textField>
 				<componentElement>
-					<reportElement key="table 1" mode="Transparent" x="10" y="59" width="300" height="51" uuid="be25e49f-cb20-410e-a993-78817dedfbf7">
+					<reportElement key="table 1" mode="Opaque" x="10" y="59" width="300" height="51" uuid="be25e49f-cb20-410e-a993-78817dedfbf7">
 						<property name="TRYTON_RELATIONS" value="taxes"/>
 					</reportElement>
 					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
@@ -808,7 +808,7 @@
     ?
         $F{line-tax-amount}
     :
-        '']]></textFieldExpression>
+        ""]]></textFieldExpression>
 			</textField>
 		</band>
 		<band height="16" splitType="Stretch">
