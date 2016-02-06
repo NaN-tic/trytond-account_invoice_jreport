@@ -68,7 +68,7 @@ msgstr "Fecha vencimiento"
 
 msgctxt "jasper:account.invoice.jreport:"
 msgid "Invoice"
-msgstr "Facturar"
+msgstr "Factura"
 
 msgctxt "jasper:account.invoice.jreport:"
 msgid "Origins"
@@ -236,4 +236,4 @@ msgstr "Configuración de cuenta por compañía"
 
 msgctxt "model:ir.action,name:report_invoice"
 msgid "Invoice"
-msgstr "Facturar"
+msgstr "Factura"
