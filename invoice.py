@@ -16,7 +16,7 @@ class InvoiceReport:
         Config = pool.get('account.configuration')
         config = Config(1)
         parameters = {
-            'invoice_qty_decimal': config.invoice_qty_decimal
+            'invoice_qty_decimal': config.invoice_qty_decimal or False
             }
         if 'parameters' in data:
             data['parameters'].update(parameters)
