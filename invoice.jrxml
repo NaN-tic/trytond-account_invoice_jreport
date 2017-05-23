@@ -690,15 +690,7 @@
 	</pageHeader>
 	<detail>
 		<band height="16" splitType="Stretch">
-			<textField isStretchWithOverflow="true">
-				<reportElement x="16" y="2" width="474" height="12" uuid="a68e49fc-dca2-48bf-a369-91523da21914">
-					<printWhenExpression><![CDATA[$F{line-type} == "title" || $F{line-type} == "comment" || $F{line-type} == "subtotal"]]></printWhenExpression>
-				</reportElement>
-				<textElement textAlignment="Left" markup="styled">
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{line-note} ? $F{line-description}+"\n<style forecolor=\"#808080\">"+$F{line-note}+"</style>" : $F{line-description}]]></textFieldExpression>
-			</textField>
+			<printWhenExpression><![CDATA[$F{line-type} == "line"]]></printWhenExpression>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement x="57" y="2" width="310" height="12" uuid="8cd45fbc-1218-4cf5-b806-bb43ae9c4879">
 					<printWhenExpression><![CDATA[$F{line-type} == "line"]]></printWhenExpression>
@@ -752,6 +744,18 @@
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{line-tax-type} == 'percentage' ? $F{line-tax-rate}*100+"%" : $F{line-tax-amount} ? $F{line-tax-amount} : '']]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="16">
+			<printWhenExpression><![CDATA[$F{line-type} != "line"]]></printWhenExpression>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="17" y="4" width="474" height="12" uuid="a68e49fc-dca2-48bf-a369-91523da21914">
+					<printWhenExpression><![CDATA[$F{line-type} == "title" || $F{line-type} == "comment" || $F{line-type} == "subtotal"]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left" markup="styled">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{line-note} ? $F{line-description}+"\n<style forecolor=\"#808080\">"+$F{line-note}+"</style>" : $F{line-description}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
