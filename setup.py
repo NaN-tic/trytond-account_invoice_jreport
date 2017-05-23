@@ -40,7 +40,7 @@ setup(name='trytonzz_account_invoice_jreport',
         ],
     package_data={
         'trytond.modules.account_invoice_jreport': info.get('xml', []) \
-            + ['tryton.cfg', 'locale/*.po'],
+            + ['tryton.cfg', 'locale/*.po', '*.jrxml'],
         },
     classifiers=[
         'Development Status :: 5 - Production/Stable',
