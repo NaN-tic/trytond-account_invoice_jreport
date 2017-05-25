@@ -305,7 +305,13 @@
 					<textElement textAlignment="Left">
 						<font size="12" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{type-type} .equals("out_credit_note") ? tr($V{L},"Credit Note")+" "+$F{number-number} : $F{state-state}.equals("validated") ? tr($V{L},"Pro-forma") : $F{state-state}.equals("draft") ? tr($V{L},"Quotation") : ($F{party-vat_code} || $F{party-identifier})? tr($V{L},"Invoice")+" "+$F{number-number} : tr($V{L},"Simplified Invoice")+" "+$F{number-number}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[(
+    $F{total_amount-total_amount} >= 0
+    ?
+        tr($V{L},"Invoice Number")+":"
+    :
+        tr($V{L},"Refund Number")+":"
+) + " " + $F{number-number}]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
 					<reportElement x="65" y="35" width="235" height="12" uuid="bcb43a8d-520e-44e8-8cb8-92664ef9dd0d">
@@ -749,7 +755,7 @@
 		<band height="16">
 			<printWhenExpression><![CDATA[$F{line-type} != "line"]]></printWhenExpression>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="17" y="4" width="474" height="12" uuid="a68e49fc-dca2-48bf-a369-91523da21914">
+				<reportElement x="17" y="4" width="522" height="12" uuid="a68e49fc-dca2-48bf-a369-91523da21914">
 					<printWhenExpression><![CDATA[$F{line-type} == "title" || $F{line-type} == "comment" || $F{line-type} == "subtotal"]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Left" markup="styled">
