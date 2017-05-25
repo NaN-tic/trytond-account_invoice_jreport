@@ -1,4 +1,4 @@
-# 
+#
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
@@ -35,8 +35,16 @@ msgid "Invoice"
 msgstr "Factura"
 
 msgctxt "jasper:account.invoice:"
+msgid "Invoice Number"
+msgstr "Número factura"
+
+msgctxt "jasper:account.invoice:"
 msgid "Maturity date"
 msgstr "Vencimiento"
+
+msgctxt "jasper:account.invoice:"
+msgid "Refund Number"
+msgstr "Número abono"
 
 msgctxt "jasper:account.invoice:"
 msgid "Origins"
