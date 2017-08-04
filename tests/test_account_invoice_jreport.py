@@ -25,6 +25,6 @@ class AccountInvoiceJreportTestCase(unittest.TestCase):
 def suite():
     suite = trytond.tests.test_tryton.suite()
     suite.addTests(unittest.TestLoader().loadTestsFromTestCase(
-        SurveyCase))
+        AccountInvoiceJreportTestCase))
     return suite
 
