@@ -280,7 +280,7 @@
     $V{stripped_bank_account}.substring(4, 8) + " " +
     $V{stripped_bank_account}.substring(8, 10) + " " +
     "*****" + " " +
-    $V{stripped_bank_account}.substring(20, 24)
+    ($V{stripped_bank_account}.length() > 20 ? $V{stripped_bank_account}.substring(20, 24) : '')
 :
     ""]]></variableExpression>
 	</variable>
