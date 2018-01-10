@@ -3,7 +3,12 @@
 The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
 <tryton>
     <data>
+        <!-- desactive report invoice -->
         <record model="ir.action.report" id="account_invoice.report_invoice">
+            <field name="active" eval="False"/>
+        </record>
+
+        <record model="ir.action.report" id="report_invoice">
             <field name="name">Invoice</field>
             <field name="model">account.invoice</field>
             <field name="report_name">account.invoice</field>
@@ -11,19 +16,11 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
             <field name="extension">pdf</field>
         </record>
 
-        <!-- desactive wizard invoice -->
-        <record model="ir.action.wizard" id="account_invoice.print">
-            <field name="name">Invoice</field>
-            <field name="wiz_name">account.invoice.print</field>
-            <field name="model">account.invoice</field>
-            <field name="active">False</field>
-        </record>
-
         <!-- add keyword form print in invoice report -->
         <record model="ir.action.keyword" id="report_keyword_print">
             <field name="keyword">form_print</field>
             <field name="model">account.invoice,-1</field>
-            <field name="action" ref="account_invoice.report_invoice"/>
+            <field name="action" ref="report_invoice"/>
         </record>
     </data>
 </tryton>
