@@ -8,55 +8,51 @@ msgstr "Base"
 
 msgctxt "report:account.invoice:"
 msgid "Credit Note"
-msgstr "Abono"
+msgstr "Nota de crédito"
 
 msgctxt "report:account.invoice:"
 msgid "Date"
-msgstr "Fecha"
+msgstr "Data"
 
 msgctxt "report:account.invoice:"
 msgid "Debit"
-msgstr "Debe"
+msgstr "Débito"
 
 msgctxt "report:account.invoice:"
 msgid "Description"
-msgstr "Descripción"
+msgstr "Descrição"
 
 msgctxt "report:account.invoice:"
 msgid "Due dates"
-msgstr "Vencimientos"
+msgstr "Data de vencimento"
 
 msgctxt "report:account.invoice:"
 msgid "Invoice"
-msgstr "Factura"
+msgstr "Fatura"
 
 msgctxt "report:account.invoice:"
 msgid "Invoice Number"
-msgstr "Número factura"
+msgstr "Número da fatura"
 
 msgctxt "report:account.invoice:"
 msgid "Maturity date"
-msgstr "Vencimiento"
-
-msgctxt "report:account.invoice:"
-msgid "Refund Number"
-msgstr "Número abono"
+msgstr "Data de vencimento"
 
 msgctxt "report:account.invoice:"
 msgid "Origins"
-msgstr "Origen"
+msgstr "Origem"
 
 msgctxt "report:account.invoice:"
 msgid "Payment Term"
-msgstr "Plazo de pago"
+msgstr "Prazo de pagamento"
 
 msgctxt "report:account.invoice:"
 msgid "Payment Type"
-msgstr "Tipo de pago"
+msgstr "Tipo de pagamento"
 
 msgctxt "report:account.invoice:"
 msgid "Price"
-msgstr "Precio"
+msgstr "Preço"
 
 msgctxt "report:account.invoice:"
 msgid "Pro-forma"
@@ -64,31 +60,35 @@ msgstr "Pro-forma"
 
 msgctxt "report:account.invoice:"
 msgid "Qtat."
-msgstr "Cant."
+msgstr "Quant."
 
 msgctxt "report:account.invoice:"
 msgid "Quotation"
-msgstr "Presupuesto"
+msgstr "Orçamento"
 
 msgctxt "report:account.invoice:"
 msgid "Reference"
-msgstr "Referencia"
+msgstr "Referência"
+
+msgctxt "report:account.invoice:"
+msgid "Refund Number"
+msgstr "Número de Reembolso"
 
 msgctxt "report:account.invoice:"
 msgid "Simplified Invoice"
-msgstr "Factura simplificada"
+msgstr "Fatura simplificada"
 
 msgctxt "report:account.invoice:"
 msgid "Tax"
-msgstr "Impuesto"
+msgstr "Imposto"
 
 msgctxt "report:account.invoice:"
 msgid "Tax Vat"
-msgstr "Impuesto"
+msgstr "IVA"
 
 msgctxt "report:account.invoice:"
 msgid "Taxes"
-msgstr "Impuestos"
+msgstr "Impostos"
 
 msgctxt "report:account.invoice:"
 msgid "Total"
@@ -96,8 +96,8 @@ msgstr "Total"
 
 msgctxt "report:account.invoice:"
 msgid "Untaxed"
-msgstr "Base imponible"
+msgstr "Sub-Total"
 
 msgctxt "report:account.invoice:"
 msgid "VAT"
-msgstr "CIF/NIF"
+msgstr "Contribuinte"
