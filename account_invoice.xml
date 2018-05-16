@@ -14,6 +14,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
             <field name="report_name">account.invoice</field>
             <field name="report">account_invoice_jreport/invoice.jrxml</field>
             <field name="extension">pdf</field>
+            <field name="template_extension">jrxml</field>
         </record>
 
         <!-- add keyword form print in invoice report -->
@@ -24,5 +25,3 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
         </record>
     </data>
 </tryton>
-
-
