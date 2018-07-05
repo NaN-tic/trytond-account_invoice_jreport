@@ -1,7 +1,14 @@
 Account Invoice Jasper Report Module
 ####################################
 
-The account_invoice_jreport module replace default account invoice report to new jasper report.
+This module allow render the new invoice report with Jasper Reports
 
-When install Account Invoice Jasper Report module, add a default language in parties
-if they are empty (None)
+Configuration file for Tryton
+-----------------------------
+
+To render invoice report when post an invoice is configurable in "jasper" section:
+
+.. code-block:: python
+
+    [jasper]
+    post_invoice = (default: True)
