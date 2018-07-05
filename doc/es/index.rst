@@ -5,5 +5,13 @@ Informe de facturación Jasper
 El módulo **Informe de facturación Jasper** reemplaza el informe de facturación
 por defecto por un informe de Jasper.
 
-Una vez instale este módulo, deberá revisar que todos los terceros dispongan de
-un idioma por defecto (no sea vacío). 
+Fichero configuración trytond
+-----------------------------
+
+Se puede configurar si se desea renderizar el informe de factua cuando se contabiliza
+una factura en la seccion 'jasper':
+
+.. code-block:: python
+
+    [jasper]
+    post_invoice = (default: True)

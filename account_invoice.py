@@ -3,6 +3,9 @@
 # the full copyright notices and license terms.
 from trytond.pool import PoolMeta
 from trytond.modules.jasper_reports.jasper import JasperReport
+from trytond.config import config as config_
+
+POST_INVOICE = config_.getboolean('jasper', 'post_invoice', default=True)
 
 __all__ = ['Invoice', 'InvoiceReport']
 
@@ -17,8 +20,7 @@ class Invoice:
     __name__ = 'account.invoice'
 
     def print_invoice(self):
-        '''
-        When post invoice call print report and cache
-        More fast post invoice without generate PDF report
-        '''
-        return
+        if POST_INVOICE:
+            super(Invoice, self).print_invoice()
+        else:
+            pass
