@@ -10,13 +10,11 @@ POST_INVOICE = config_.getboolean('jasper', 'post_invoice', default=True)
 __all__ = ['Invoice', 'InvoiceReport']
 
 
-class InvoiceReport(JasperReport):
-    __metaclass__ = PoolMeta
+class InvoiceReport(JasperReport, metaclass=PoolMeta):
     __name__ = 'account.invoice'
 
 
-class Invoice:
-    __metaclass__ = PoolMeta
+class Invoice(metaclass=PoolMeta):
     __name__ = 'account.invoice'
 
     def print_invoice(self):
