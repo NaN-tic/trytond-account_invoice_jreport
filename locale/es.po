@@ -2,13 +2,97 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-msgctxt "report:account.invoice:"
+msgctxt "model:ir.action,name:report_invoice"
+msgid "Invoice"
+msgstr "Factura"
+
+msgctxt "model:ir.action,name:report_invoice_discount"
+msgid "Invoice"
+msgstr "Factura"
+
+msgctxt "report:account.invoice.jreport:"
 msgid "Base"
 msgstr "Base"
 
+msgctxt "report:account.invoice.jreport:"
+msgid "Date"
+msgstr "Fecha"
+
+msgctxt "report:account.invoice.jreport:"
+msgid "Debit"
+msgstr "Debe"
+
+msgctxt "report:account.invoice.jreport:"
+msgid "Description"
+msgstr "Descripción"
+
+msgctxt "report:account.invoice.jreport:"
+msgid "Due dates"
+msgstr "Vencimientos"
+
+msgctxt "report:account.invoice.jreport:"
+msgid "Invoice Number"
+msgstr "Número factura"
+
+msgctxt "report:account.invoice.jreport:"
+msgid "Maturity date"
+msgstr "Vencimiento"
+
+msgctxt "report:account.invoice.jreport:"
+msgid "Origins"
+msgstr "Orígenes"
+
+msgctxt "report:account.invoice.jreport:"
+msgid "Payment Term"
+msgstr "Plazo de pago"
+
+msgctxt "report:account.invoice.jreport:"
+msgid "Payment Type"
+msgstr "Tipo de pago"
+
+msgctxt "report:account.invoice.jreport:"
+msgid "Price"
+msgstr "Precio"
+
+msgctxt "report:account.invoice.jreport:"
+msgid "Qtat."
+msgstr "Cant."
+
+msgctxt "report:account.invoice.jreport:"
+msgid "Reference"
+msgstr "Referencia"
+
+msgctxt "report:account.invoice.jreport:"
+msgid "Refund Number"
+msgstr "Número abono"
+
+msgctxt "report:account.invoice.jreport:"
+msgid "Tax"
+msgstr "Impuestos"
+
+msgctxt "report:account.invoice.jreport:"
+msgid "Tax Vat"
+msgstr "Impuesto"
+
+msgctxt "report:account.invoice.jreport:"
+msgid "Taxes"
+msgstr "Impuestos"
+
+msgctxt "report:account.invoice.jreport:"
+msgid "Total"
+msgstr "Total"
+
+msgctxt "report:account.invoice.jreport:"
+msgid "Untaxed"
+msgstr "Base imponible"
+
+msgctxt "report:account.invoice.jreport:"
+msgid "VAT"
+msgstr "NIF"
+
 msgctxt "report:account.invoice:"
-msgid "Credit Note"
-msgstr "Abono"
+msgid "Base"
+msgstr "Base"
 
 msgctxt "report:account.invoice:"
 msgid "Date"
@@ -27,20 +111,12 @@ msgid "Due dates"
 msgstr "Vencimientos"
 
 msgctxt "report:account.invoice:"
-msgid "Invoice"
-msgstr "Factura"
-
-msgctxt "report:account.invoice:"
 msgid "Invoice Number"
 msgstr "Número factura"
 
 msgctxt "report:account.invoice:"
 msgid "Maturity date"
 msgstr "Vencimiento"
-
-msgctxt "report:account.invoice:"
-msgid "Refund Number"
-msgstr "Número abono"
 
 msgctxt "report:account.invoice:"
 msgid "Origins"
@@ -59,24 +135,16 @@ msgid "Price"
 msgstr "Precio"
 
 msgctxt "report:account.invoice:"
-msgid "Pro-forma"
-msgstr "Pro-forma"
-
-msgctxt "report:account.invoice:"
 msgid "Qtat."
 msgstr "Cant."
-
-msgctxt "report:account.invoice:"
-msgid "Quotation"
-msgstr "Presupuesto"
 
 msgctxt "report:account.invoice:"
 msgid "Reference"
 msgstr "Referencia"
 
 msgctxt "report:account.invoice:"
-msgid "Simplified Invoice"
-msgstr "Factura simplificada"
+msgid "Refund Number"
+msgstr "Número abono"
 
 msgctxt "report:account.invoice:"
 msgid "Tax"
