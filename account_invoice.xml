@@ -3,22 +3,30 @@
 The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
 <tryton>
     <data>
-      <record model="ir.action.report" id="account_invoice.report_invoice">
+        <record model="ir.action.report" id="account_invoice.report_invoice">
           <field name="active" eval="False"/>
-      </record>
-      <record model="ir.action.report" id="report_invoice">
-          <field name="name">Invoice</field>
-          <field name="model">account.invoice</field>
-          <field name="report_name">account.invoice.jreport</field>
-          <field name="report">account_invoice_jreport/invoice.jrxml</field>
-          <field name="extension">pdf</field>
-          <field name="template_extension">jrxml</field>
-      </record>
+        </record>
+        <record model="ir.action.report" id="report_invoice">
+            <field name="name">Invoice</field>
+            <field name="model">account.invoice</field>
+            <field name="report_name">account.invoice.jreport</field>
+            <field name="report">account_invoice_jreport/invoice.jrxml</field>
+            <field name="extension">pdf</field>
+            <field name="template_extension">jrxml</field>
+        </record>
+        <record model="ir.action.keyword" id="report_invoice_keyword">
+            <field name="keyword">form_print</field>
+            <field name="model">account.invoice,-1</field>
+            <field name="action" ref="report_invoice"/>
+        </record>
     </data>
 
     <data depends="account_invoice_discount">
         <record model="ir.action.report" id="account_invoice_discount.report_invoice">
             <field name="active" eval="False"/>
+        </record>
+        <record model="ir.action.report" id="account_invoice_jreport.report_invoice">
+          <field name="active" eval="False"/>
         </record>
         <record model="ir.action.report" id="report_invoice_discount">
             <field name="name">Invoice</field>
@@ -27,6 +35,11 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
             <field name="report">account_invoice_jreport/invoice.jrxml</field>
             <field name="extension">pdf</field>
             <field name="template_extension">jrxml</field>
+        </record>
+        <record model="ir.action.keyword" id="report_invoice discount_keyword">
+            <field name="keyword">form_print</field>
+            <field name="model">account.invoice,-1</field>
+            <field name="action" ref="report_invoice_discount"/>
         </record>
     </data>
 </tryton>
