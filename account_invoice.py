@@ -11,7 +11,7 @@ __all__ = ['Invoice', 'InvoiceReport']
 
 
 class InvoiceReport(JasperReport, metaclass=PoolMeta):
-    __name__ = 'account.invoice'
+    __name__ = 'account.invoice.jreport'
 
 
 class Invoice(metaclass=PoolMeta):
