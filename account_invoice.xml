@@ -31,7 +31,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
         <record model="ir.action.report" id="report_invoice_discount">
             <field name="name">Invoice</field>
             <field name="model">account.invoice</field>
-            <field name="report_name">account.invoice</field>
+            <field name="report_name">account.invoice.jreport</field>
             <field name="report">account_invoice_jreport/invoice.jrxml</field>
             <field name="extension">pdf</field>
             <field name="template_extension">jrxml</field>
