@@ -17,6 +17,7 @@ MODULE2PREFIX = {
     'party_identifier': 'trytonzz',
     'party_lang': 'trytonzz',
     'jasper_reports_options': 'trytonzz',
+    'jasper_reports': 'trytonspain',
     }
 
 
@@ -57,35 +58,42 @@ requires.append(get_require_version('trytond'))
 tests_require = []
 series = '%s.%s' % (major_version, minor_version)
 if minor_version % 2:
-    branch = 'default'
+    branch = 'master'
 else:
     branch = series
+
 dependency_links = [
-    ('hg+https://bitbucket.org/trytonspain/'
+    ('git+https://github.com/trytonspain/'
+        'trytond-jasper_reports@%(branch)s'
+        '#egg=trytonspain-jasper_reports-%(series)s' % {
+            'branch': branch,
+            'series': series,
+            }),
+    ('git+https://github.com/trytonspain/'
         'trytond-company_logo@%(branch)s'
         '#egg=trytonspain-company_logo-%(series)s' % {
             'branch': branch,
             'series': series,
             }),
-    ('hg+https://bitbucket.org/trytonspain/'
+    ('git+https://github.com/trytonspain/'
         'trytond-account_payment_type@%(branch)s'
         '#egg=trytonspain-account_payment_type-%(series)s' % {
             'branch': branch,
             'series': series,
             }),
-    ('hg+https://bitbucket.org/zikzakmedia/'
+    ('git+https://github.com/nanticzz/'
         'trytond-party_identifier@%(branch)s'
         '#egg=trytonzz-party_identifier-%(series)s' % {
             'branch': branch,
             'series': series,
             }),
-    ('hg+https://bitbucket.org/zikzakmedia/'
+    ('git+https://github.com/nanticzz/'
         'trytond-party_lang@%(branch)s'
         '#egg=trytonzz-party_lang-%(series)s' % {
             'branch': branch,
             'series': series,
             }),
-    ('hg+https://bitbucket.org/zikzakmedia/'
+    ('git+https://github.com/nanticzz/'
         'trytond-jasper_reports_options@%(branch)s'
         '#egg=trytonzz-jasper_reports_options-%(series)s' % {
             'branch': branch,
